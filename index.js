@@ -1,7 +1,13 @@
-const debug = require("debug")("app");
-require("dotenv").config();
+const debug = require("debug")("app:axios");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-debug(process.env.API_KEY);
+const main = async () => {
+  const res = await axios("http://bikroy.com");
+  const data = await res.data;
+  const $ = cheerio.load(data);
+  debug($("h1").text());
 
+};
 
-
+main()
